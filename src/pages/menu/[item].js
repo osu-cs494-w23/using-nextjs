@@ -1,7 +1,4 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
-
-import Layout from '@/components/Layout'
 
 const menu = {
     tacos: {
@@ -22,22 +19,13 @@ const menu = {
       description: "Raw fish + rice",
       price: 10.95
     }
-};
+  };
 
-export default function Menu() {
-  const router = useRouter()
-  return (
-    <Layout>
-      <h1>Menu</h1>
-      <ul>
-        {Object.keys(menu).map(key => (
-          <li key={key}>
-            <Link href={`${router.asPath}/${key}`}>
-              {menu[key].name}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </Layout>
-  )
+export default function MenuItem() {
+    const router = useRouter()
+    console.log("== router.query:", router.query)
+    const item = menu[router.query.item]
+    return (
+        <h1>Selected menu item: {item && item.name}</h1>
+    )
 }
